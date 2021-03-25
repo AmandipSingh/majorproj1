@@ -21,8 +21,9 @@ class _MyApi extends State<MyApi>{
 
   Map data;
   List userData;
-  var userData1;
-  var userData2;
+  String userData1;
+  String userData2;
+  var userData3;
 
   Future getData() async{
     var url = Uri.parse("http://www.omdbapi.com/?i=tt3896198&apikey=7d05796f");
@@ -32,7 +33,8 @@ class _MyApi extends State<MyApi>{
     setState(() {
       userData = data as List;
       userData1 = data["Title"];
-      userData2 = data["imdbRating"];
+      userData2 = data["Poster"];
+      userData3 = data["imdbRating"];
     });
   }
 
@@ -60,12 +62,12 @@ class _MyApi extends State<MyApi>{
         child: Row(
           children: <Widget>[
             CircleAvatar(
-              backgroundImage: NetworkImage(),
+              backgroundImage: NetworkImage(userData3),
             ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                    "${userData[0]}, ${userData[16]}"
+                    "${userData1}, ${userData2}"
                 ),
               ),
             ],
