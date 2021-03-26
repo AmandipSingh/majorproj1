@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -19,22 +18,22 @@ class MyApi extends StatefulWidget{
 
 class _MyApi extends State<MyApi>{
 
-  Map data;
-  List userData;
-  String userData1;
-  String userData2;
-  var userData3;
+  Map<String, dynamic> data;
+  List<dynamic> userData;
+  List<dynamic> userDatap;
+  var userData1;
+  var userData2;
 
   Future getData() async{
     var url = Uri.parse("http://www.omdbapi.com/?i=tt3896198&apikey=7d05796f");
-    http.Response response = await http.get(url);
+    var response = await http.get(url);
     data = json.decode(response.body);
 
+
     setState(() {
-      userData = data as List;
+      //userData = data[];
       userData1 = data["Title"];
-      userData2 = data["Poster"];
-      userData3 = data["imdbRating"];
+      userData2 = data["Rated"];
     });
   }
 
@@ -52,28 +51,21 @@ class _MyApi extends State<MyApi>{
         title: Text("My Api"),
         backgroundColor: Colors.brown,
       ),
-      body: Container(
-            width: 200.0,
-            height: 250.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              color: Colors.redAccent,
-            ),
-        child: Row(
+      body: Row(
           children: <Widget>[
             CircleAvatar(
-              backgroundImage: NetworkImage(userData3),
+              backgroundImage: NetworkImage("https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"),
             ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                    "${userData1}, ${userData2}"
+                    "${userData1}"
+                    "${userData2}"
                 ),
               ),
             ],
         ),
-      ),
-    );
+      );
   }
 }
 
